@@ -27,11 +27,11 @@ ip = input("Provide an IP address you would like to monitor: ")
 def send_upAlert():
     now = datetime.now()
     s = smtplib.SMTP('smtp.gmail.com', 587)
-    s.starttls()
-    s.login(email, password)
+    s.starttls() # starts TLS for security
+    s.login(email, password) # Authentication
     message = "Your server came back to live!"
-    s.sendmail("hearbeat@bot.com", email, message)
-    s.quit
+    s.sendmail("hearbeat@bot.com", email, message) # Message to be sent
+    s.quit # terminate the session
 
 # Function that dows the pint test
 def ping_test():

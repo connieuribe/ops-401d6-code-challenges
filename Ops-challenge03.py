@@ -3,7 +3,7 @@ import os, time, smtplib
 from datetime import datetime
 from getpass import getpass
 # Script: Ops 401 Class 03 Ops Challenge Solution
-# Author: Connie Uribe Chavez
+# Author: Marco Vazquez, edited by Connie Uribe Chavez
 # Date of lates revision: 20 Apr 2023
 # Purpose: uptime sensor tool that checks systems are responding by adding a feature that notifies you of interesting status changes.
 # Reference: 

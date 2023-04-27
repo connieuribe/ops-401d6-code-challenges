@@ -1,49 +1,83 @@
 #!/usr/bin/env python3
 from cryptography.fernet import Fernet
+import os
 # Script: Ops 401 Class 06 Ops Challenge Solution
-# Author: Marco Vazquez, edited by Connie Uribe Chavez
-# Date of lates revision: 24 Apr 2023
+# Author: Connie Uribe Chavez
+# Date of lates revision: 26 Apr 2023
 # Purpose: File Encryption Script Part 1 of 3
-# Reference: 
+# Reference: https://towardsdatascience.com/encrypt-and-decrypt-files-using-python-python-programming-pyshark-a67774bbf9f4
+# Reference: https://www.geeksforgeeks.org/encrypt-and-decrypt-files-using-python/
 # -------------------------------
 
-# Prompt the user to select a mode:
-# Encrypt a file (mode 1)
-# Decrypt a file (mode 2)
-# Encrypt a message (mode 3)
-# Decrypt a message (mode 4)
-# If mode 1 or 2 are selected, prompt the user to provide a filepath to a target file.
-# If mode 3 or 4 are selected, prompt the user to provide a cleartext string.
-# Depending on the selection, perform one of the below functions. You’ll need to create four functions:
 
-# Encrypt the target file if in mode 1.
-# Delete the existing target file and replace it entirely with the encrypted version.
-# Decrypt the target file if in mode 2.
-# Delete the encrypted target file and replace it entirely with the decrypted version.
-# Encrypt the string if in mode 3.
-# Print the ciphertext to the screen.
-# Decrypt the string if in mode 4.
-# Print the cleartext to the screen.
-###################################
-
-
-
-
-#function to handle writing key
-def write_key():
-    #generate a key and save it into a file
-    key = Fernet.generate_key()
+# function to handle generating key
+def generateKey():
+    key = Fernet.generate_key() # generate a key and save it into a file
     with open("key.key", "wb") as key_file:
-            key_file.write(key)
+        key_file.write(key)
+    return open("key.key", "rb").read() # load the key from the current file names key.key
+  
 
-def load_key():
-    #load the key from the current file names key.key
-    return open("key.key", "rb").read()
 
-#main
-#generate and write a new key
-write_key()
-#load the previously generate key
-key = load_key()
-#test
-print("The key is " + str(key))
+# Encrypt the target 
+def encrypt(target):
+    # initialize the fernet class
+    encryption = Fernet(key)
+    # actually do the encryption
+    return encryption.encrypt(target)
+    
+
+# Decrypt the target
+def decrypt(target):
+    # initialized the fernet class
+    decryption = Fernet(key)
+    # decrypt the data
+    return decryption.decrypt(target)
+    
+# Prompt the user to select a mode:
+def userSelection():
+    mode = input("Select a mode:\
+           \n   [1] Encrypt a file\
+           \n   [2] Decrypt a file\
+           \n   [3] Encrypt a message\
+           \n   [4] Decrypt a message\n")
+    match mode:
+        case "1":
+            # Encrypt a file
+            filePath = input("Enter the path of a file: ")
+            # opening the original file to encrypt
+            with open(filePath, 'rb') as file:
+                content = file.read()
+            encrypted = encrypt(content)
+            # opening the file in write mode and
+            # writing the encrypted data
+            with open(filePath, 'wb') as encrypted_file:
+                encrypted_file.write(encrypted)
+        case "2":
+            #Decrypt a file
+            filePath = input("Enter the path of a file: ")
+            # opening the encrypted file
+            with open(filePath, 'rb') as enc_file:
+                content = enc_file.read()
+            decrypted = decrypt(content)
+            # opening the file in write mode and
+            # writing the decrypted data
+            with open(filePath, 'wb') as dec_file:
+                dec_file.write(decrypted)
+        case "3":
+            #Encrypt a message
+            msg = input("Enter a message: ")
+            encrypted = encrypt(msg.encode())
+            print("The encrypted message is " + str(encrypted))
+        case "4":
+            #Decrypt a message
+            msg = input("Enter a message: ")
+            decrypted = decrypt(msg.encode('utf-8'))
+            print("the decrypted message " + str(decrypted.decode('utf-8')))
+        case _:
+            print("Invalid input")
+
+
+key = generateKey()# generate and write a new key
+while True:
+    userSelection() # Run the user GUI

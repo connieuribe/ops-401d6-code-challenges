@@ -33,29 +33,48 @@ def decrypt(target):
 key = generateKey()# generate and write a new key
 startDir = "/home/connieuribe/CodeFellows/TestFile"
 
+
+
 # Add a feature capability to your script to:
 # for each file in the files list, encrypt the data.
 # Recursively encrypt a single folder and all its contents.
 def encryptRecur():
-    for dirs, files in os.walk(startDir):
+    for root, dirs, files in os.walk(startDir):
         for fileName in files:
-            with open(fileName, 'rb') as file:
-                original = file.read()
-            encrypted = encrypt(original)
-            with open(fileName, 'wb') as encrypted_file:
+            filePath = os.path.join(root, fileName)
+            with open(filePath, 'rb') as file:
+                content = file.read()
+            encrypted = encrypt(content)
+            with open(filePath, 'wb') as encrypted_file:
                 encrypted_file.write(encrypted)
         for dirName in dirs:
-            print("Directory name: " + dirName)
+            dirPath = os.path.join(root, dirName)
+            print("Directory name: " + dirPath)
 
 
 # Recursively decrypt a single folder that was encrypted by this tool.
 def decryptRecur():
-    for dirs, files in os.walk(startDir):
+    for root, dirs, files in os.walk(startDir):
         for fileName in files:
-            with open(fileName, 'rb') as enc_file:
+            filePath = os.path.join(root, fileName)
+            with open(filePath, 'rb') as enc_file:
                 content = enc_file.read()
             decryptedFile = decrypt(content)
-            with open(fileName, 'wb') as dec_file:
+            with open(filePath, 'wb') as dec_file:
                 dec_file.write(decryptedFile)
         for dirName in dirs:
-            print("Directory name: " + dirName)
+            dirPath = os.path.join(root, dirName)
+            print("Directory name: " + dirPath)
+
+
+
+
+
+while True:
+    strInput = input("Select (1) to encrypt all files (2) to decrypt all files: ")
+    if (strInput == "1"):
+        encryptRecur()
+    elif (strInput == "2"):
+        decryptRecur()
+    else:
+        print("Invalid input, try again . . . ")            

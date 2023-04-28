@@ -23,9 +23,7 @@ def changeBackground():
 
 # Create a popup window on a Linux PC with a ransomware message
 def pop_up():
-    time.sleep(1)
     pyautogui.alert('Got you!!! ')
-    time.sleep(5)
     # Press the "Enter" key to dismiss the popup window
     pyautogui.press('enter')
 

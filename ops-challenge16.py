@@ -1,12 +1,24 @@
 # Import libraries
 import time, getpass
+# Script: Ops 401 Class 16 Ops Challenge Solution
+# Author: Connie Uribe Chavez
+# Date of latest revision: 08 May 2023
+# Purpose: Automated Brute Force Wordlist Attack Tool Part 1 of 3
+# Purpose: develop a custom tool that performs brute force attacks to better understand the types of automation employed by adversaries
+# Reference: ChatGPT And CodeFellows 401d6 Class Demo
 
+# Mode 1: Offensive; Dictionary Iterator
+# Accepts a user input word list file path and iterates through the word list, assigning the word being read to a variable.
+# Add a delay between words.
+# Print to the screen the value of the variable.
 # Declare functions
 def iterator ():
-    filepath = input("Enter your dictionary filepath:\n")
-    #filepath = '/home/osboxes/Desktop/rockyou2.txt' #test filepath
-    
-    file = open(filepath, encoding = "ISO-8859-1") # address encoding problem
+    try:
+        filepath = input("Enter your dictionary filepath:\n")
+        file = open(filepath)
+    except FileNotFoundError:
+        print("Invalid file path.")
+        return
     line = file.readline()
     while line:
         line = line.rstrip()
@@ -16,28 +28,45 @@ def iterator ():
         line = file.readline()
     file.close()
 
-# def check_password()
-# Add password recognition code here
-#
-#
-#
+
+# Mode 2: Defensive; Password Recognized
+# Accepts a user input string.
+# Accepts a user input word list file path.
+# Search the word list for the user input string.
+# Print to the screen whether the string appeared in the word list.
+def check_password():
+    try:
+        filepath = input("Enter your dictionary filepath:\n")
+        file = open(filepath)
+    except FileNotFoundError:
+        print("\nInvalid file path.\n")
+        return
+    search_str = input("Enter the string to search for:\n")
+    with file:
+        for line in file:
+            if search_str in line:
+                print(f"\n{search_str} found in the dictionary -- You need a stronger password!\n")
+                return True
+    print(f"\n{search_str} not found in the dictionary.\n")
+    file.close()
+    return False
 
 # Main
-
-if __name__ == "__main__": # when my computer runs this file...do this stuff
-    while True:
-        mode = input("""
-Brue Force Wordlist Attack Tool Menu
+# prompts the user to select one of the following modes:
+while True:
+    mode = input("""
+Brute Force Wordlist Attack Tool Menu
 1 - Offensive, Dictionary Iterator
 2 - Defensive, Password Recognized
 3 - Exit
     Please enter a number: 
 """)
-        if (mode == "1"):
+    match mode:
+        case "1":
             iterator()
-        elif (mode == "2"):
+        case "2":
             check_password()
-        elif (mode == '3'):
+        case "3":
             break
         else:
             print("Invalid selection...") 

@@ -2,9 +2,9 @@
 from scapy.all import *
 import ipaddress
 
-# Script: Ops 401 Class 12 Ops Challenge Solution
+# Script: Ops 401 Class 13 Ops Challenge Solution
 # Author: ChatGPT edited, tested and completed by Connie Uribe Chavez
-# Date of latest revision: 02 May 2023
+# Date of latest revision: 03 May 2023
 # Purpose: Network Security Tool with Scapy Part 3 of 3
 # Purpose: The final iteration of your network scanning tool
 # Reference: ChatGPT

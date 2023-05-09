@@ -68,5 +68,10 @@ Brute Force Wordlist Attack Tool Menu
             check_password()
         case "3":
             break
-        else:
-            print("Invalid selection...") 
+        case _:
+            print("Invalid choice. Please try again.")
+
+
+# Note: The RockYou passwords come bundled with Kali Linux, 
+# but you can also download them separately at the above link. 
+# Once downloaded, use the “tar -zxvf rockyou.txt.tar.gz” to open the file.

@@ -6,7 +6,7 @@ import sys
 # Date of latest revision: 09 May 2023
 # Purpose: Automated Brute Force Wordlist Attack Tool Part 2 of 3
 # Purpose: develop a custom tool that performs brute force attacks.
-# Reference: ChatGPT And CodeFellows 401d6 Class Demo
+# Reference: Used code from ChatGPT And CodeFellows 401d6 Class Demo class repo
 # Authenticate to an SSH server by its IP address.
 
 # GOAL: Assume the username and IP are known inputs and attempt each word on the 

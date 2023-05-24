@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 from zipfile import ZipFile
 # Script: Ops 401 Class 18 Ops Challenge Solution
 # Author: ChatGPT edited, tested and completed by Connie Uribe Chavez

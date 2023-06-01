@@ -1,53 +1,45 @@
 #!/usr/bin/python3
-# Script: Ops 401 Class 31 Ops Challenge Solution
-# Author: Used Demo code, edited by Connie Uribe Chavez
-# Date of latest revision: 30 May 2023
-# Purpose: 
-# Purpose: 
-from sys import platform
+import platform
 import os
-from glob import glob
+# Script: Ops 401 Class 31 Ops Challenge Solution
+# Author: Connie Uribe Chavez
+# Date of latest revision: 01 Jun 2023
+# Purpose: Signature-based Malware Detection Part 1 of 3
+# Purpose: development of my own basic antivirus tool in Python.
+#reference: Sierra's demo
+###############################################################
+# Prompt the user to type in a file name to search for.
+# Prompt the user for a directory to search in.
+# Search each file in the directory by name.
+# TIP: You may need to perform different commands depending on what OS you’re executing the script on.
 
-def do_linux_stuff():
-    directory = "." # prompt user
-    whichFile = "*.png" # prompt
-    # os.system("find " + str(directory) + ' -type f -name "' + str(whichFile) + "\" -print | echo \"Found $(grep -c /) files that matched:\"")
-    os.system(f"find {directory} -type f -name '{whichFile}' -print | echo Found $(grep -c /) files that matched:")
-
-def do_windows_stuff():
-    directory = "." # prompt user
-    whichFile = "*.png" # prompt 
-    searchCount = os.popen("dir /a:-d /s /b " + str(directory) + " | find /c \":\\\"").read()
+# For each positive detection, print to the screen the file name and location.
+# At the end of the search process, print to the screen how many files were searched and how many hits were found.
+# The script must successfully execute on both Ubuntu Linux 20.04 Focal Fossa and Windows 10.
+###############################################################
 
 
-def do_cross_platform_stuff():
-    """print out all images found
-    Image = something.png for now
-    Look for any pngs vs. examining each file
-    """
-    # print(help(os.walk))
-    directory = "." # prompt user
-    file_patterns = ["*.png","image_a*.jpg"] # prompt user (will need to convert user input to list)
+def searchForFileInDir(fileName, dirName):
+    countFiles = 0
+    filesFound = []
+    for root, dirs, files in os.walk(dirName):
+        for file in files:
+            countFiles += 1
+            if file == fileName:
+                filesFound.append(os.path.join(root,file))
+    print(f"There were {countFiles} files searched")
+    return filesFound
 
-    matched_files = []
-
-    for dirpath, dirnames, filenames in os.walk(directory):
-        for file_pattern in file_patterns:
-            current_matched_files =  glob(dirpath + "/" + file_pattern)
-            matched_files += current_matched_files
-            # append will make nested lists, concat will append item by item
-
-    matched_count = len(matched_files)
-    print(f"Found {matched_count} files.")
-    return matched_files
-
-# would like to run do_linux_stuff when executing on Linux, do_windows_stuff when on Windows
-
-# if platform == "windows":
-#     do_windows_stuff()
-# else:
-#     do_linux_stuff()
-
-matched = do_cross_platform_stuff()
-print(matched)
-
+def main():
+    userDir = input("Type a directory to search in: ")
+    userFile = input("Type a file name to search for: ") 
+    list = searchForFileInDir(userFile, userDir)
+    print("This operating system is: ", platform.system())
+    print("The number of hits found: ", len(list))
+    if len(list) == 0:
+        print("No files found.")
+    else:
+        for file in list:
+            print("File name: ", userFile)
+            print("File location: ", file)
+main()

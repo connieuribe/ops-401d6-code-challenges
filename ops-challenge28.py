@@ -3,10 +3,11 @@ from zipfile import ZipFile
 import logging
 import logging.handlers as handlers
 # Script: Ops 401 Class 28 Ops Challenge Solution
-# Author: ChatGPT edited, tested and completed by Connie Uribe Chavez
+# Author: Connie Uribe Chavez
 # Date of latest revision: 01 June 2023
 # Purpose: Event Logging Tool Part 3 of 3
 # Purpose: logging capabilities into one of your existing Python tools
+# Reference: ChatGPT and Class Demo ops401d6: class28
 ################################################################
 # Use StreamHandler and FileHandler in your Python script.
 # FileHandler should write to a local file.

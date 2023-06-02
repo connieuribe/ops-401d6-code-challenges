@@ -4,7 +4,7 @@ import logging
 import logging.handlers as handlers
 # Script: Ops 401 Class 27 Ops Challenge Solution
 # Author: Connie Uribe Chavez
-# Date of latest revision: 23 May 2023
+# Date of latest revision: 01 June 2023
 # Purpose: Event Logging Tool Part 2 of 3
 # Purpose: logging capabilities into one of your existing Python tools
 # Reference: https://github.com/codefellows/seattle-ops-401d6/blob/main/class-27/challenges/DEMO.md

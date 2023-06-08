@@ -1,10 +1,14 @@
 
 #!/usr/bin/env python3
-
-# The below Python script shows one possible method to return the cookie from a site that supports cookies.
-
 import requests
 import webbrowser
+# Script: Ops 401 Class 37 Ops Challenge Solution
+# Author: ChatGPT and demo code edited by Connie Uribe Chavez
+# Date of latest revision: 07 Jun 2023
+# Purpose: Cookie Capture Capades
+
+
+
 # targetsite = input("Enter target site:") # Uncomment this to accept user input target site
 targetsite = "http://www.whatarecookies.com/cookietest.asp" # Comment this out if you're using the line above
 response = requests.get(targetsite)
